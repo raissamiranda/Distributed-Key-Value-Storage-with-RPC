@@ -14,25 +14,35 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bpairs.proto\x12\x05pairs\x1a\x1bgoogle/protobuf/empty.proto\"+\n\rInsertRequest\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\t\" \n\x0eInsertResponse\x12\x0e\n\x06result\x18\x01 \x01(\x05\"\x1c\n\rSearchRequest\x12\x0b\n\x03key\x18\x01 \x01(\x05\"\x1f\n\x0eSearchResponse\x12\r\n\x05value\x18\x01 \x01(\t\"\x1d\n\x0f\x41\x63tivateRequest\x12\n\n\x02id\x18\x01 \x01(\t\"#\n\x11TerminateResponse\x12\x0e\n\x06result\x18\x01 \x01(\x05\x32\xfd\x01\n\nOperations\x12\x37\n\x06Insert\x12\x14.pairs.InsertRequest\x1a\x15.pairs.InsertResponse\"\x00\x12\x37\n\x06Search\x12\x14.pairs.SearchRequest\x1a\x15.pairs.SearchResponse\"\x00\x12<\n\x08\x41\x63tivate\x12\x16.pairs.ActivateRequest\x1a\x16.google.protobuf.Empty\"\x00\x12?\n\tTerminate\x12\x16.google.protobuf.Empty\x1a\x18.pairs.TerminateResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bpairs.proto\x12\x05pairs\x1a\x1bgoogle/protobuf/empty.proto\"4\n\x0fRegisterRequest\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x10\n\x08keysList\x18\x02 \x03(\x05\"%\n\x10RegisterResponse\x12\x11\n\tkeysCount\x18\x01 \x01(\x05\",\n\x17ServerTerminateResponse\x12\x11\n\tkeysCount\x18\x01 \x01(\x05\"\x12\n\x10TerminateRequest\"+\n\rInsertRequest\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\t\" \n\x0eInsertResponse\x12\x0e\n\x06result\x18\x01 \x01(\x05\"\x1c\n\rSearchRequest\x12\x0b\n\x03key\x18\x01 \x01(\x05\"\x1f\n\x0eSearchResponse\x12\r\n\x05value\x18\x01 \x01(\t\"\x1d\n\x0f\x41\x63tivateRequest\x12\n\n\x02id\x18\x01 \x01(\t\"#\n\x11TerminateResponse\x12\x0e\n\x06result\x18\x01 \x01(\x05\x32\xfe\x01\n\nOperations\x12\x37\n\x06Insert\x12\x14.pairs.InsertRequest\x1a\x15.pairs.InsertResponse\"\x00\x12\x37\n\x06Search\x12\x14.pairs.SearchRequest\x1a\x15.pairs.SearchResponse\"\x00\x12<\n\x08\x41\x63tivate\x12\x16.pairs.ActivateRequest\x1a\x16.google.protobuf.Empty\"\x00\x12@\n\tTerminate\x12\x17.pairs.TerminateRequest\x1a\x18.pairs.TerminateResponse\"\x00\x32\xa0\x01\n\x11\x43\x65ntralOperations\x12=\n\x08Register\x12\x16.pairs.RegisterRequest\x1a\x17.pairs.RegisterResponse\"\x00\x12L\n\x0fServerTerminate\x12\x17.pairs.TerminateRequest\x1a\x1e.pairs.ServerTerminateResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'pairs_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_INSERTREQUEST']._serialized_start=51
-  _globals['_INSERTREQUEST']._serialized_end=94
-  _globals['_INSERTRESPONSE']._serialized_start=96
-  _globals['_INSERTRESPONSE']._serialized_end=128
-  _globals['_SEARCHREQUEST']._serialized_start=130
-  _globals['_SEARCHREQUEST']._serialized_end=158
-  _globals['_SEARCHRESPONSE']._serialized_start=160
-  _globals['_SEARCHRESPONSE']._serialized_end=191
-  _globals['_ACTIVATEREQUEST']._serialized_start=193
-  _globals['_ACTIVATEREQUEST']._serialized_end=222
-  _globals['_TERMINATERESPONSE']._serialized_start=224
-  _globals['_TERMINATERESPONSE']._serialized_end=259
-  _globals['_OPERATIONS']._serialized_start=262
-  _globals['_OPERATIONS']._serialized_end=515
+  _globals['_REGISTERREQUEST']._serialized_start=51
+  _globals['_REGISTERREQUEST']._serialized_end=103
+  _globals['_REGISTERRESPONSE']._serialized_start=105
+  _globals['_REGISTERRESPONSE']._serialized_end=142
+  _globals['_SERVERTERMINATERESPONSE']._serialized_start=144
+  _globals['_SERVERTERMINATERESPONSE']._serialized_end=188
+  _globals['_TERMINATEREQUEST']._serialized_start=190
+  _globals['_TERMINATEREQUEST']._serialized_end=208
+  _globals['_INSERTREQUEST']._serialized_start=210
+  _globals['_INSERTREQUEST']._serialized_end=253
+  _globals['_INSERTRESPONSE']._serialized_start=255
+  _globals['_INSERTRESPONSE']._serialized_end=287
+  _globals['_SEARCHREQUEST']._serialized_start=289
+  _globals['_SEARCHREQUEST']._serialized_end=317
+  _globals['_SEARCHRESPONSE']._serialized_start=319
+  _globals['_SEARCHRESPONSE']._serialized_end=350
+  _globals['_ACTIVATEREQUEST']._serialized_start=352
+  _globals['_ACTIVATEREQUEST']._serialized_end=381
+  _globals['_TERMINATERESPONSE']._serialized_start=383
+  _globals['_TERMINATERESPONSE']._serialized_end=418
+  _globals['_OPERATIONS']._serialized_start=421
+  _globals['_OPERATIONS']._serialized_end=675
+  _globals['_CENTRALOPERATIONS']._serialized_start=678
+  _globals['_CENTRALOPERATIONS']._serialized_end=838
 # @@protoc_insertion_point(module_scope)

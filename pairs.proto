@@ -7,8 +7,28 @@ service Operations {
     rpc Insert(InsertRequest) returns (InsertResponse) {}
     rpc Search(SearchRequest) returns (SearchResponse) {}
     rpc Activate(ActivateRequest) returns (google.protobuf.Empty) {}
-    rpc Terminate(google.protobuf.Empty) returns (TerminateResponse) {}
+    rpc Terminate(TerminateRequest) returns (TerminateResponse) {}
 }
+
+service CentralOperations {
+    rpc Register(RegisterRequest) returns (RegisterResponse) {}
+    rpc ServerTerminate(TerminateRequest) returns (ServerTerminateResponse) {}
+}
+
+message RegisterRequest {
+    string address = 1;
+    repeated int32 keysList = 2;
+}
+
+message RegisterResponse {
+    int32 keysCount = 1;
+}
+
+message ServerTerminateResponse {
+    int32 keysCount = 1;
+}
+
+message TerminateRequest {}
 
 message InsertRequest {
     int32 key = 1;

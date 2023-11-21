@@ -32,7 +32,7 @@ class OperationsStub(object):
                 )
         self.Terminate = channel.unary_unary(
                 '/pairs.Operations/Terminate',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                request_serializer=pairs__pb2.TerminateRequest.SerializeToString,
                 response_deserializer=pairs__pb2.TerminateResponse.FromString,
                 )
 
@@ -84,7 +84,7 @@ def add_OperationsServicer_to_server(servicer, server):
             ),
             'Terminate': grpc.unary_unary_rpc_method_handler(
                     servicer.Terminate,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    request_deserializer=pairs__pb2.TerminateRequest.FromString,
                     response_serializer=pairs__pb2.TerminateResponse.SerializeToString,
             ),
     }
@@ -160,7 +160,101 @@ class Operations(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/pairs.Operations/Terminate',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            pairs__pb2.TerminateRequest.SerializeToString,
             pairs__pb2.TerminateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class CentralOperationsStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.Register = channel.unary_unary(
+                '/pairs.CentralOperations/Register',
+                request_serializer=pairs__pb2.RegisterRequest.SerializeToString,
+                response_deserializer=pairs__pb2.RegisterResponse.FromString,
+                )
+        self.ServerTerminate = channel.unary_unary(
+                '/pairs.CentralOperations/ServerTerminate',
+                request_serializer=pairs__pb2.TerminateRequest.SerializeToString,
+                response_deserializer=pairs__pb2.ServerTerminateResponse.FromString,
+                )
+
+
+class CentralOperationsServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def Register(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ServerTerminate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_CentralOperationsServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'Register': grpc.unary_unary_rpc_method_handler(
+                    servicer.Register,
+                    request_deserializer=pairs__pb2.RegisterRequest.FromString,
+                    response_serializer=pairs__pb2.RegisterResponse.SerializeToString,
+            ),
+            'ServerTerminate': grpc.unary_unary_rpc_method_handler(
+                    servicer.ServerTerminate,
+                    request_deserializer=pairs__pb2.TerminateRequest.FromString,
+                    response_serializer=pairs__pb2.ServerTerminateResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'pairs.CentralOperations', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class CentralOperations(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def Register(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/pairs.CentralOperations/Register',
+            pairs__pb2.RegisterRequest.SerializeToString,
+            pairs__pb2.RegisterResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ServerTerminate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/pairs.CentralOperations/ServerTerminate',
+            pairs__pb2.TerminateRequest.SerializeToString,
+            pairs__pb2.ServerTerminateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
