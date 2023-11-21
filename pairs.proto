@@ -1,0 +1,36 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+package pairs;
+
+service Operations {
+    rpc Insert(InsertRequest) returns (InsertResponse) {}
+    rpc Search(SearchRequest) returns (SearchResponse) {}
+    rpc Activate(ActivateRequest) returns (google.protobuf.Empty) {}
+    rpc Terminate(google.protobuf.Empty) returns (TerminateResponse) {}
+}
+
+message InsertRequest {
+    int32 key = 1;
+    string value = 2;
+}
+
+message InsertResponse {
+    int32 result = 1;
+}
+
+message SearchRequest {
+    int32 key = 1;
+}
+
+message SearchResponse {
+    string value = 1;
+}
+
+message ActivateRequest {
+    string id = 1;
+}
+
+message TerminateResponse {
+    int32 result = 1;
+}
