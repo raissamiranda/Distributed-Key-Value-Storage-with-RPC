@@ -56,7 +56,6 @@ def serve():
 
     if (len(sys.argv) == 2):
         portNumber = sys.argv[1]
-        print("Server is running on port " + str(portNumber))
 
     if (len(sys.argv) == 3):
         portNumber = sys.argv[1]
