@@ -17,7 +17,6 @@ class CentralServer:
 
         count = 0
         for key in request.keysList:
-            print("Registering key " + str(key) + " to server " + request.address)
             # Register key to server address
             self.keyToServerMap[key] = request.address
             count += 1
@@ -25,7 +24,6 @@ class CentralServer:
         return pairs_pb2.RegisterResponse(keysCount = count)
 
     def ServerTerminate(self, request, context):
-        print("Trying to terminate server")
         count = len(self.keyToServerMap)
         # Remove all keys registered to server
         self.keyToServerMap.clear()

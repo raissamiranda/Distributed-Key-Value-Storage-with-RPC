@@ -16,7 +16,6 @@ class Pair:
         self.server = server
 
     def Insert(self, request, context):
-        print("Trying to insert key " + str(request.key) + " with value " + request.value)
         if request.key in self.pair:
             return pairs_pb2.InsertResponse(result=-1)
         else:
@@ -38,14 +37,11 @@ class Pair:
             stub = pairs_pb2_grpc.CentralOperationsStub(channel)
             # Call Register method on the stub and send a Register request to central server
             port = sys.argv[1]
-            print("port: " + port)
-            print("IP:" + socket.getfqdn())
             response = stub.Register(pairs_pb2.RegisterRequest(address=f"{socket.getfqdn()}:{port}", keysList=self.pair.keys()))
             return pairs_pb2.ActivateResponse(count=response.keysCount)
         return pairs_pb2.ActivateResponse(count=0)
 
     def Terminate(self, request, context):
-        print("Trying to terminate server")
         # Remove all keys registered to server
         self.pair.clear()
         # Stop server
@@ -65,7 +61,6 @@ def serve():
     if (len(sys.argv) == 3):
         portNumber = sys.argv[1]
         controlFlag = sys.argv[2]
-        print("Server is running on port " + str(portNumber) + " with control flag " + str(controlFlag))
 
     # Create new gRPC server instance. It uses a thread pool executor to handle requests with a maximum of 10 threads
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
