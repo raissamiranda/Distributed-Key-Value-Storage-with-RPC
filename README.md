@@ -42,6 +42,7 @@ C,2
 
 ### Activation:
 Takes a string identifier and send all pairs stored in its dictionary to central server.
+It returns the number of pairs registered.
 
 Usage format:
 ```
@@ -118,6 +119,7 @@ I,2,likes
 I,3,grpc
 I,2,somuch
 C,3
+A,localhost:6666
 T
 ```
 
@@ -129,6 +131,7 @@ The outputs should be:
 0
 -1
 grpc
+4
 ```
 
 In the central client:
