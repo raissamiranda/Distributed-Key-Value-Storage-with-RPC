@@ -6,12 +6,13 @@ package pairs;
 service Operations {
     rpc Insert(InsertRequest) returns (InsertResponse) {}
     rpc Search(SearchRequest) returns (SearchResponse) {}
-    rpc Activate(ActivateRequest) returns (google.protobuf.Empty) {}
+    rpc Activate(ActivateRequest) returns (ActivateResponse) {}
     rpc Terminate(TerminateRequest) returns (TerminateResponse) {}
 }
 
 service CentralOperations {
     rpc Register(RegisterRequest) returns (RegisterResponse) {}
+    rpc Map(MapRequest) returns (MapResponse) {}
     rpc ServerTerminate(TerminateRequest) returns (ServerTerminateResponse) {}
 }
 
@@ -29,6 +30,14 @@ message ServerTerminateResponse {
 }
 
 message TerminateRequest {}
+
+message MapRequest {
+    int32 key = 1;
+}
+
+message MapResponse {
+    string address = 1;
+}
 
 message InsertRequest {
     int32 key = 1;
@@ -49,6 +58,10 @@ message SearchResponse {
 
 message ActivateRequest {
     string id = 1;
+}
+
+message ActivateResponse {
+    int32 count = 1;
 }
 
 message TerminateResponse {

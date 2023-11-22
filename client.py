@@ -45,9 +45,10 @@ def run():
             # Activate request
             elif command.startswith('A,'):
                 _, serviceID = command.split(',', 1)
+                print("Service ID: " + serviceID)
                 # Call Activate method on the stub and send an Activate request to server
-                response = stub.Activate(pairs_pb2.ActivateRequest(service_id=serviceID))
-                print(response.code)
+                response = stub.Activate(pairs_pb2.ActivateRequest(id=serviceID))
+                print(response.count)
 
             # Terminate request
             elif command == 'T':

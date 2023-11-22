@@ -2,7 +2,6 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 import pairs_pb2 as pairs__pb2
 
 
@@ -28,7 +27,7 @@ class OperationsStub(object):
         self.Activate = channel.unary_unary(
                 '/pairs.Operations/Activate',
                 request_serializer=pairs__pb2.ActivateRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                response_deserializer=pairs__pb2.ActivateResponse.FromString,
                 )
         self.Terminate = channel.unary_unary(
                 '/pairs.Operations/Terminate',
@@ -80,7 +79,7 @@ def add_OperationsServicer_to_server(servicer, server):
             'Activate': grpc.unary_unary_rpc_method_handler(
                     servicer.Activate,
                     request_deserializer=pairs__pb2.ActivateRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                    response_serializer=pairs__pb2.ActivateResponse.SerializeToString,
             ),
             'Terminate': grpc.unary_unary_rpc_method_handler(
                     servicer.Terminate,
@@ -144,7 +143,7 @@ class Operations(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/pairs.Operations/Activate',
             pairs__pb2.ActivateRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            pairs__pb2.ActivateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -180,6 +179,11 @@ class CentralOperationsStub(object):
                 request_serializer=pairs__pb2.RegisterRequest.SerializeToString,
                 response_deserializer=pairs__pb2.RegisterResponse.FromString,
                 )
+        self.Map = channel.unary_unary(
+                '/pairs.CentralOperations/Map',
+                request_serializer=pairs__pb2.MapRequest.SerializeToString,
+                response_deserializer=pairs__pb2.MapResponse.FromString,
+                )
         self.ServerTerminate = channel.unary_unary(
                 '/pairs.CentralOperations/ServerTerminate',
                 request_serializer=pairs__pb2.TerminateRequest.SerializeToString,
@@ -191,6 +195,12 @@ class CentralOperationsServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def Register(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Map(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -209,6 +219,11 @@ def add_CentralOperationsServicer_to_server(servicer, server):
                     servicer.Register,
                     request_deserializer=pairs__pb2.RegisterRequest.FromString,
                     response_serializer=pairs__pb2.RegisterResponse.SerializeToString,
+            ),
+            'Map': grpc.unary_unary_rpc_method_handler(
+                    servicer.Map,
+                    request_deserializer=pairs__pb2.MapRequest.FromString,
+                    response_serializer=pairs__pb2.MapResponse.SerializeToString,
             ),
             'ServerTerminate': grpc.unary_unary_rpc_method_handler(
                     servicer.ServerTerminate,
@@ -239,6 +254,23 @@ class CentralOperations(object):
         return grpc.experimental.unary_unary(request, target, '/pairs.CentralOperations/Register',
             pairs__pb2.RegisterRequest.SerializeToString,
             pairs__pb2.RegisterResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Map(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/pairs.CentralOperations/Map',
+            pairs__pb2.MapRequest.SerializeToString,
+            pairs__pb2.MapResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

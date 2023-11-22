@@ -2,6 +2,7 @@ from concurrent import futures
 
 import grpc
 import sys
+import socket
 
 import pairs_pb2
 import pairs_pb2_grpc
@@ -29,8 +30,19 @@ class Pair:
             return pairs_pb2.SearchResponse(value = "")
 
     def Activate(self, request, context):
-        # TO DO
-        return grpc.Empty()
+        # If there is control flag, then connect to central server
+        if len(sys.argv) == 3:
+            # Create gRPC channel to central server
+            channel = grpc.insecure_channel(request.id)
+            # Create stub to call RPC methods on central server
+            stub = pairs_pb2_grpc.CentralOperationsStub(channel)
+            # Call Register method on the stub and send a Register request to central server
+            ip, port = request.id.split(":", 1)
+            print("port: " + port)
+            print("IP:" + socket.getfqdn())
+            response = stub.Register(pairs_pb2.RegisterRequest(address=f"{socket.getfqdn()}:{port}", keysList=self.pair.keys()))
+            return pairs_pb2.ActivateResponse(count=response.keysCount)
+        return pairs_pb2.ActivateResponse(count=0)
 
     def Terminate(self, request, context):
         print("Trying to terminate server")
@@ -46,15 +58,14 @@ def serve():
         print("Usage: python3 server.py <portNumber> [controlFlag]")
         sys.exit(1)
 
+    if (len(sys.argv) == 2):
+        portNumber = sys.argv[1]
+        print("Server is running on port " + str(portNumber))
+
     if (len(sys.argv) == 3):
         portNumber = sys.argv[1]
         controlFlag = sys.argv[2]
-
-    if (len(sys.argv) == 2):
-        portNumber = sys.argv[1]
-        controlFlag = 0
-
-    print("Server is running on port " + str(portNumber) + " with control flag " + str(controlFlag))
+        print("Server is running on port " + str(portNumber) + " with control flag " + str(controlFlag))
 
     # Create new gRPC server instance. It uses a thread pool executor to handle requests with a maximum of 10 threads
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
@@ -71,6 +82,9 @@ def serve():
 
     # Keep thread alive
     server.wait_for_termination()
+
+def getMyIP():
+    socket.gethostbyname(socket.gethostname())
 
 if __name__ == '__main__':
     serve()

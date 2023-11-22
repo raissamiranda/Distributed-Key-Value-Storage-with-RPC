@@ -29,6 +29,13 @@ def run():
                 response = stub.ServerTerminate(pairs_pb2.TerminateRequest())
                 print(response.keysCount)
                 break
+
+            if command.startswith('C,'):
+                _, key = command.split(',', 1)
+                # Call Search method on the stub and send a Search request to server
+                response = stub.Map(pairs_pb2.MapRequest(key=int(key)))
+                print(response.address + ':')
+
     except EOFError:
         sys.exit(0)
 

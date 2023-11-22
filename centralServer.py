@@ -14,10 +14,9 @@ class CentralServer:
         self.server = server
 
     def Register(self, request, context):
-        print("Trying to register key " + str(request.key) + " with server " + request.server_id)
 
+        count = 0
         for key in request.keysList:
-            count = 0
             # Register key to server address
             self.keyToServerMap[key] = request.address
             count += 1
@@ -33,6 +32,12 @@ class CentralServer:
         self.server.stop(0)
         # Return number of keys removed from server
         return pairs_pb2.ServerTerminateResponse(keysCount = count)
+
+    def Map(self, request, context):
+        for key in self.keyToServerMap:
+            if key == request.key:
+                return pairs_pb2.MapResponse(address = self.keyToServerMap[key])
+        return pairs_pb2.MapResponse(address = "")
 
 
 def serve():
