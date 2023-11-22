@@ -17,6 +17,7 @@ class CentralServer:
 
         count = 0
         for key in request.keysList:
+            print("Registering key " + str(key) + " to server " + request.address)
             # Register key to server address
             self.keyToServerMap[key] = request.address
             count += 1

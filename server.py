@@ -37,7 +37,7 @@ class Pair:
             # Create stub to call RPC methods on central server
             stub = pairs_pb2_grpc.CentralOperationsStub(channel)
             # Call Register method on the stub and send a Register request to central server
-            ip, port = request.id.split(":", 1)
+            port = sys.argv[1]
             print("port: " + port)
             print("IP:" + socket.getfqdn())
             response = stub.Register(pairs_pb2.RegisterRequest(address=f"{socket.getfqdn()}:{port}", keysList=self.pair.keys()))

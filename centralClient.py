@@ -21,12 +21,14 @@ def run():
 
     try:
         while(True):
+            channel = grpc.insecure_channel(serviceIdentifier)
+            stub = pairs_pb2_grpc.CentralOperationsStub(channel)
             command = input()
 
             #Terminate request
             if command == 'T':
-                # Call Terminate method on the stub and send a Terminate request to server
                 response = stub.ServerTerminate(pairs_pb2.TerminateRequest())
+                # Call Terminate method on the stub and send a Terminate request to server
                 print(response.keysCount)
                 break
 
@@ -34,7 +36,11 @@ def run():
                 _, key = command.split(',', 1)
                 # Call Search method on the stub and send a Search request to server
                 response = stub.Map(pairs_pb2.MapRequest(key=int(key)))
-                print(response.address + ':')
+                print(response.address + ':', end='')
+                channel = grpc.insecure_channel(response.address)
+                stub = pairs_pb2_grpc.OperationsStub(channel)
+                response = stub.Search(pairs_pb2.SearchRequest(key=int(key)))
+                print(response.value)
 
     except EOFError:
         sys.exit(0)
